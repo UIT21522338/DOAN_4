@@ -73,10 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                             .subscribe(
                                     userModel -> {
                                         if(userModel.isSuccess()){
-                                            Utils.user = userModel.getResult().get(0);
-                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(LoginActivity.this, HomeMainActivity.class));
+                                            if(userModel.getMessage().equals("khach")){
+                                                Utils.user = userModel.getResult().get(0);
+                                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(LoginActivity.this, HomeMainActivity.class));
+                                            }else{
+                                                startActivity(new Intent(LoginActivity.this, ThongKe.class));
 
+                                            }
                                         }else{
                                             Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
 

@@ -8,6 +8,7 @@ import com.example.doan.Model.GetAllSPModelResult;
 import com.example.doan.Model.InvoiceDetailModelResult;
 import com.example.doan.Model.InvoiceModelResult;
 import com.example.doan.Model.ListSPModel;
+import com.example.doan.Model.ThongKeModelResult;
 import com.example.doan.Model.UserModel;
 
 import java.util.ArrayList;
@@ -24,6 +25,12 @@ public interface ApiMobile {
 
     @GET("AllSP.php")
     Observable<GetAllSPModelResult> getAllSP();
+
+    @GET("ThongKeSLDonHang.php")
+    Observable<ThongKeModelResult> thongKeSL();
+
+    @GET("ThongKeDoanhThu.php")
+    Observable<ThongKeModelResult> thongKeDoanhThu();
 
     @POST("test1.php")
     @FormUrlEncoded
