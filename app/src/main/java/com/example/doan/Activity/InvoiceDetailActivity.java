@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class InvoiceDetailActivity extends AppCompatActivity {
     ApiMobile apiMobile;
     InvoiceModel shoes;
     String MaDH;
+    ImageView btn_back_invoicedetail;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,15 @@ public class InvoiceDetailActivity extends AppCompatActivity {
 
         initRecyclerview();
         initView();
+
+        btn_back_invoicedetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InvoiceDetailActivity.this, InvoiceActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null){
@@ -101,6 +112,9 @@ public class InvoiceDetailActivity extends AppCompatActivity {
         txt_thanhtien_invoice_detail = findViewById(R.id.txt_thanhtien_invoice_detail);
         txt_madh_invoice_detail = findViewById(R.id.txt_madh_invoice_detail);
         txt_phiship_invoice_detail = findViewById(R.id.txt_phiship_invoice_detail);
+        btn_back_invoicedetail = findViewById(R.id.btn_back_invoicedetail);
+
+
         txt_name_invoice_detail.setText(Utils.user.getHoten());
         txt_soDT_invoice_detail.setText(Utils.user.getSodt());
         txt_diachi_invoice_detail.setText(Utils.user.getDiachi());

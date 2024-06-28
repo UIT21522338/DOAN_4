@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/txt_TieuDe_InvoiceDT"
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Nike Club Max"

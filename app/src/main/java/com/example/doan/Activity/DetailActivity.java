@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
     SizeDetailAdapter sizeAdapter;
 
     int size;
+    ImageView btn_back_detail;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,7 @@ public class DetailActivity extends AppCompatActivity {
         recyclerViewColor = findViewById(R.id.recyclerViewColor);
         recyclerViewSize = findViewById(R.id.recyclerViewSize);
         btn_cart = findViewById(R.id.btn_cart);
+        btn_back_detail = findViewById(R.id.btn_back_detail);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null){
@@ -138,6 +141,15 @@ public class DetailActivity extends AppCompatActivity {
                 }
 
                 Toast.makeText(DetailActivity.this,"Thêm sản phẩm vào giỏ hàng thành công",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btn_back_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailActivity.this, HomeMainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

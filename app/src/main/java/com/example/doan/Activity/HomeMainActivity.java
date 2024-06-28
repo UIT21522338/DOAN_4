@@ -23,6 +23,7 @@ import com.example.doan.R;
 import com.example.doan.Retrofit.ApiMobile;
 import com.example.doan.Retrofit.RetrofitClient;
 import com.example.doan.Utils.Utils;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -110,6 +111,8 @@ public class HomeMainActivity extends AppCompatActivity {
                                 recyclerViewPopular = findViewById(R.id.rw_main1);
                                 recyclerViewPopular.setAdapter(adapterPopular);
                                 recyclerViewPopular.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+                            }else {
+                                Log.e("abc", "Response success is false");
                             }
                         },
                         throwable -> {

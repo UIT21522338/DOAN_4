@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,12 +31,23 @@ public class InvoiceActivity extends AppCompatActivity {
     private RecyclerView recyclerview_invoice;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     ApiMobile apiMobile;
+    ImageView btn_back_invoice;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice);
 
         initRecyclerview();
+        btn_back_invoice = findViewById(R.id.btn_back_invoice);
+
+        btn_back_invoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InvoiceActivity.this, HomeMainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 

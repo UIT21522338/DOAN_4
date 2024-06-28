@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ public class ListProdcutActivity extends AppCompatActivity {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     ViewPageListAdapter listAdapter;
     ApiMobile apiMobile;
+    ImageView btn_back_listproduct;
 
     String click = "Nam";
     @Override
@@ -68,6 +70,7 @@ public class ListProdcutActivity extends AppCompatActivity {
         txt_women_list = findViewById(R.id.txt_women_list);
         txt_men_list = findViewById(R.id.txt_men_list);
         edt_search = findViewById(R.id.edt_search);
+        btn_back_listproduct = findViewById(R.id.btn_back_listproduct);
 
 
         apiMobile = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiMobile.class);
@@ -75,6 +78,15 @@ public class ListProdcutActivity extends AppCompatActivity {
 
         txt_men_list.setTypeface(txt_men_list.getTypeface(), Typeface.BOLD_ITALIC);
         txt_women_list.setTypeface(null , Typeface.NORMAL);
+
+        btn_back_listproduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListProdcutActivity.this, HomeMainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         compositeDisposable.add(apiMobile.getAllSP()
@@ -85,9 +97,6 @@ public class ListProdcutActivity extends AppCompatActivity {
                             if(List.isSuccess()){
                                 listAdapter = new ViewPageListAdapter(ListProdcutActivity.this, R.layout.viewholder_list_product, List.getResultNam());
                                 gridViewListProduct.setAdapter(listAdapter);
-
-                                list_tmpNam = List.getResultNam();
-                                list_tmpNu = List.getResultNu();
                             }
                         },
                         throwable -> {

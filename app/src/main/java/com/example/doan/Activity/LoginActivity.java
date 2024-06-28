@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.example.doan.R;
 import com.example.doan.Retrofit.ApiMobile;
 import com.example.doan.Retrofit.RetrofitClient;
 import com.example.doan.Utils.Utils;
+import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -27,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     ApiMobile apiMobile;
     EditText edt_sodt_login, edt_matkhau_login;
 
+    ImageView btn_back_login;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -36,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_dangNhap = findViewById(R.id.txt_dangNhap);
         edt_sodt_login = findViewById(R.id.edt_sodt_login);
         edt_matkhau_login = findViewById(R.id.edt_matkhau_login);
+        btn_back_login = findViewById(R.id.btn_back_login);
 
         apiMobile = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiMobile.class);
 
@@ -58,29 +63,44 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String sodt = edt_sodt_login.getText().toString().trim();
                 String password = edt_matkhau_login.getText().toString().trim();
-                compositeDisposable.add(apiMobile.dangnhap(sodt, password)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                userModel -> {
-                                    if(userModel.isSuccess()){
-                                        Utils.user = userModel.getResult().get(0);
-                                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(LoginActivity.this, HomeMainActivity.class));
 
-                                    }else{
-                                        Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                if(sodt.length() == 0 || password.length() == 0){
+                    Toast.makeText(LoginActivity.this, "Không được để trống số điện thoại hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+                }else{
+                    compositeDisposable.add(apiMobile.dangnhap(sodt, password)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                    userModel -> {
+                                        if(userModel.isSuccess()){
+                                            Utils.user = userModel.getResult().get(0);
+                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(LoginActivity.this, HomeMainActivity.class));
 
+                                        }else{
+                                            Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    },
+                                    throwable -> {
+                                        Toast.makeText(LoginActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.e("abc", throwable.getMessage());
                                     }
-                                },
-                                throwable -> {
-                                    Toast.makeText(LoginActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                                    Log.e("abc", throwable.getMessage());
-                                }
 
-                        )
-                );
+                            )
+                    );
+                }
 
+
+            }
+        });
+
+        btn_back_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

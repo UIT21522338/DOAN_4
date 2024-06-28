@@ -9,7 +9,7 @@ public class PopularModel implements Serializable {
     private Double giasp;
     private String img1;
     private String img2;
-    private String thongtinSP;
+    private String thongtinsp;
     private Float rate;
 
 //    private String description;
@@ -62,7 +62,7 @@ public class PopularModel implements Serializable {
         this.giasp = giasp;
         this.img1 = img1;
         this.img2 = img2;
-        this.thongtinSP = thongtinSP;
+        this.thongtinsp = thongtinSP;
         this.rate = rate;
     }
 
@@ -125,11 +125,11 @@ public class PopularModel implements Serializable {
     }
 
     public String getThongtinSP() {
-        return thongtinSP;
+        return thongtinsp;
     }
 
     public void setThongtinSP(String thongtinSP) {
-        this.thongtinSP = thongtinSP;
+        this.thongtinsp = thongtinSP;
     }
 
     public Float getRate() {

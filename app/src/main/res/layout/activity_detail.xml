@@ -19,7 +19,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/btn_back_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:text="Men's Shoes"
+                    android:text="Shoes"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -61,7 +61,7 @@
                     android:background="@color/grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_back_detail" />
                 <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                     android:id="@+id/dotsIndicator"
                     android:layout_width="wrap_content"

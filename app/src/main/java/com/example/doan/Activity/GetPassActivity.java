@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class GetPassActivity extends AppCompatActivity {
     private EditText edt_SoDT_GetPass, edt_NewPass_GetPass, edt_ConfirmPass_GetPass;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     ApiMobile apiMobile;
+    ImageView btn_back_getPass;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getpass);
@@ -32,6 +34,7 @@ public class GetPassActivity extends AppCompatActivity {
         edt_SoDT_GetPass = findViewById(R.id.edt_SoDT_GetPass);
         edt_NewPass_GetPass = findViewById(R.id.edt_NewPass_GetPass);
         edt_ConfirmPass_GetPass = findViewById(R.id.edt_ConfirmPass_GetPass);
+        btn_back_getPass = findViewById(R.id.btn_back_getPass);
 
         apiMobile = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiMobile.class);
 
@@ -69,6 +72,15 @@ public class GetPassActivity extends AppCompatActivity {
                     Toast.makeText(GetPassActivity.this, "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        btn_back_getPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GetPassActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
