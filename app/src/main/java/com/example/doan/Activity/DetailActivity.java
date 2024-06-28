@@ -47,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
     SizeDetailAdapter sizeAdapter;
 
     int size;
-    ImageView btn_back_detail;
+    ImageView btn_back_detail, btn_cart_detail;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +64,14 @@ public class DetailActivity extends AppCompatActivity {
         recyclerViewSize = findViewById(R.id.recyclerViewSize);
         btn_cart = findViewById(R.id.btn_cart);
         btn_back_detail = findViewById(R.id.btn_back_detail);
+        btn_cart_detail = findViewById(R.id.btn_cart_detail);
+
+        btn_cart_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DetailActivity.this, CartActivity.class));
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null){
